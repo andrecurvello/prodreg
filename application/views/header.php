@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=0.8">
 	<meta charset="utf-8">
 	<title><?php echo ( !empty($page_title) ) ? "ProdReg - ".$page_title: "ProdReg"; ?></title>
 	

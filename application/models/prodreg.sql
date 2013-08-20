@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 19, 2013 at 03:46 AM
+-- Generation Time: Aug 20, 2013 at 06:13 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -40,9 +40,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('36e1e559d324edeceee7751dbe78f76b', '192.168.2.7', 'Mozilla/5.0 (Linux; U; Android 4.2.2; en-us; Galaxy Nexus Build/JDQ39) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.', 1376875254, ''),
-('529ecd6b706787e2a6b26b652244939b', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 1376873824, 0x613a343a7b733a393a22757365725f64617461223b733a303a22223b733a373a22757365725f6964223b733a313a2232223b733a383a22757365726e616d65223b733a353a227573657232223b733a363a22737461747573223b733a313a2231223b7d),
-('e175063b4e1ecaeacdaa72ae1497e909', '192.168.2.6', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 1376876674, '');
+('a2d1190b15f8a6988c66389261b68773', '192.168.2.6', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 1376971468, 0x613a343a7b733a393a22757365725f64617461223b733a303a22223b733a373a22757365725f6964223b733a313a2232223b733a383a22757365726e616d65223b733a353a227573657232223b733a363a22737461747573223b733a313a2231223b7d),
+('b185d62313200b7e1ef2fde87279f6a0', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 1376966315, '');
 
 -- --------------------------------------------------------
 
@@ -61,24 +60,49 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `test_devices`
+--
+
+CREATE TABLE IF NOT EXISTS `test_devices` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+  `price` double NOT NULL,
+  `image` text NOT NULL,
+  `warranty_in_days` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `test_devices`
+--
+
+INSERT INTO `test_devices` (`id`, `name`, `description`, `price`, `image`, `warranty_in_days`) VALUES
+(0, 'Nexus 10', 'Nexus 10 is the powerful 10-inch tablet from Google. With a super high resolution display, multi-user support, immersive HD content and the best Google apps - Nexus 10 has something for everyone.', 399.99, 'https://www.google.com/nexus/images/nexus-10-new/N10_Overview_bottom-1200.jpg', 360),
+(1, 'iPhone 5', 'The iPhone 5 is a touchscreen-based smartphone developed by Apple Inc.. It is the sixth generation of the iPhone and succeeds the iPhone 4S. The phone is a slimmer, lighter model that introduces a higher-resolution, 4-inch screen to the series with 16:9 widescreen aspect ratio.', 599.99, 'http://topoften.com/wp-content/uploads/2013/08/iphone5-landscape.jpg', 100);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `test_prodreg`
 --
 
 CREATE TABLE IF NOT EXISTS `test_prodreg` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `display_name` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `detailed_info` longtext NOT NULL,
-  PRIMARY KEY (`ID`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) NOT NULL,
+  `custom_name` varchar(255) DEFAULT NULL,
+  `custom_image` text,
+  `date_purchased` date NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `test_prodreg`
 --
 
-INSERT INTO `test_prodreg` (`ID`, `display_name`, `image`, `detailed_info`) VALUES
-(1, 'iPhone 4', 'http://placehold.it/350x200', 'a:1:{s:13:"detailed_info";a:3:{i:1;a:2:{s:12:"display_name";s:13:"Purchase Date";s:5:"value";s:0:"";}i:2;a:2:{s:12:"display_name";s:15:"Purchase Vendor";s:5:"value";s:0:"";}i:3;a:2:{s:12:"display_name";s:5:"Color";s:5:"value";s:0:"";}}}'),
-(2, 'iPad 2', 'http://placehold.it/350x200', 'a:1:{s:13:"detailed_info";a:3:{i:1;a:2:{s:12:"display_name";s:13:"Purchase Date";s:5:"value";s:0:"";}i:2;a:2:{s:12:"display_name";s:15:"Purchase Vendor";s:5:"value";s:0:"";}i:3;a:2:{s:12:"display_name";s:5:"Color";s:5:"value";s:0:"";}}}');
+INSERT INTO `test_prodreg` (`id`, `userid`, `custom_name`, `custom_image`, `date_purchased`) VALUES
+(1, 0, 'iPhone 4', 'http://placehold.it/350x200', '0000-00-00'),
+(2, 0, 'iPad 2', 'http://placehold.it/350x200', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -111,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `email`, `activated`, `banned`, `ban_reason`, `new_password_key`, `new_password_requested`, `new_email`, `new_email_key`, `last_ip`, `last_login`, `created`, `modified`) VALUES
 (1, 'afaqurk', '$P$BuYWcWRkHCm1YpuYtZL246QRpsySs9.', 'afaq05@gmail.com', 1, 0, NULL, NULL, NULL, NULL, NULL, '127.0.0.1', '2013-08-18 06:37:49', '2013-08-18 05:20:50', '2013-08-18 04:37:49'),
-(2, 'user2', '$P$B9Hbx6qjlniwvmZ.qBDaaoFiKuLItX0', 'user2@gmail.com', 1, 0, NULL, NULL, NULL, NULL, NULL, '127.0.0.1', '2013-08-19 02:57:09', '2013-08-18 05:23:58', '2013-08-19 00:57:09'),
+(2, 'user2', '$P$B9Hbx6qjlniwvmZ.qBDaaoFiKuLItX0', 'user2@gmail.com', 1, 0, NULL, NULL, NULL, NULL, NULL, '192.168.2.6', '2013-08-20 04:41:27', '2013-08-18 05:23:58', '2013-08-20 02:41:27'),
 (3, 'user3', '$P$BEosK/pCqfAC5yiFTLwOAQu034MD/m0', 'user3@gmail.com', 1, 0, NULL, NULL, NULL, NULL, NULL, '127.0.0.1', '0000-00-00 00:00:00', '2013-08-18 05:25:27', '2013-08-18 03:25:27');
 
 -- --------------------------------------------------------

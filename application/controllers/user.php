@@ -29,13 +29,7 @@ class User extends CI_Controller {
 			$data['username'] = $this->tank_auth->get_username();
 			$data['userid'] = $this->tank_auth->get_user_id();	
 			
-			$data['devices'] = array(
-									'iPhone 5',
-									'iPad 3',
-									'Nexus 10', 
-									'GE 4100 Refrigerator',
-									'Tesla Model S',
-									'B244HL Monitor');
+			$data['devices'] = $this->db->get_where('test_devices',array('id <'=>5))->result_array();
 			$this->load->view('user/home',$data);
 		
 	}
