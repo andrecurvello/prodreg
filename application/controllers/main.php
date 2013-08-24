@@ -18,8 +18,8 @@ class Main extends CI_Controller {
 		$this->load->view('home_page');
 	}
 	
-	public function about(){
-		$this->load->view('about');
+	public function features(){
+		$this->load->view('features');
 	}
 }
 
